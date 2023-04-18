@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Route } from 'react-router-dom';
 import { Routes } from "react-router-dom";
-import Sth from "./Sth";
 import PaletteWithProps from "./PalleteWithProps";
+import PaletteList from "./PaletteList";
+import seedColors from "./seedColors";
 
 class App extends Component {
 
@@ -10,7 +11,7 @@ class App extends Component {
     return (
 
       <Routes>
-        <Route exact path="/" element={<h1>Palette list goes here</h1>} />
+        <Route exact path="/" element={<PaletteList palettes={seedColors} />} />
         <Route path="/palette/:id" element={<PaletteWithProps />} />
       </Routes>
     );
