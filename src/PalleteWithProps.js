@@ -11,7 +11,6 @@ function PaletteWithProps() {
             return palette.id === id;
         })
     }
-    console.log(id, findPalette(id))
 
     return <Palette palette={generatePalette(findPalette(id))} />
 }

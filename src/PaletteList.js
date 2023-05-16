@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import MiniPalette from './MiniPalette'
 import { createUseStyles } from 'react-jss'
 
 const styles = createUseStyles({
     root: {
         backgroundColor: 'blue',
-        height: '100%',
+        height: '100vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
@@ -22,7 +22,8 @@ const styles = createUseStyles({
         display: 'flex',
         width: '100%',
         justifyContent: 'space-between',
-        color: 'white'
+        color: 'white',
+        marginBottom: '10px'
     },
     palettes: {
         boxSizing: 'border-box',
@@ -38,6 +39,12 @@ export default function PaletteList(props) {
 
     const classes = styles()
     const { palettes } = props
+    let navigate = useNavigate()
+
+    const goToPalette = (id) => {
+        navigate(`/palette/${id}`)
+    }
+
     return (
         <div className={classes.root}>
             <div className={classes.container}>
@@ -46,7 +53,7 @@ export default function PaletteList(props) {
                 </nav>
                 <div className={classes.palettes}>
                     {palettes.map(palette => (
-                        <MiniPalette key={palette.id} {...palette} />
+                        <MiniPalette key={palette.id} {...palette} handleClick={() => goToPalette(palette.id)} />
                     ))}
                 </div>
             </div>
