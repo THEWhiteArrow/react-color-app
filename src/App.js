@@ -4,7 +4,7 @@ import { Routes } from "react-router-dom";
 import PaletteWithProps from "./PalleteWithProps";
 import PaletteList from "./PaletteList";
 import seedColors from "./seedColors";
-import SingleColorPalette from "./SingleColorPalette";
+import SingleColorPaletteFunction from "./SingleColorPaletteFunction";
 class App extends Component {
 
   render() {
@@ -13,7 +13,7 @@ class App extends Component {
       <Routes>
         <Route exact path="/" element={<PaletteList palettes={seedColors} />} />
         <Route path="/palette/:id" element={<PaletteWithProps />} />
-        <Route path="/palette/:id/:colorId" element={<SingleColorPalette />} />
+        <Route path="/palette/:id/:colorId" element={<SingleColorPaletteFunction />} />
       </Routes>
     );
   }
