@@ -3,6 +3,7 @@ import ColorBox from './ColorBox';
 import 'rc-slider/assets/index.css';
 import './Palette.css'
 import Navbar from './Navbar';
+import PaletteFooter from './PaletteFooter';
 
 class Palette extends Component {
     constructor(props) {
@@ -27,14 +28,11 @@ class Palette extends Component {
         return (
 
             <div className='Palette'>
-                <Navbar level={level} changeLevel={this.changeLevel} handleChange={this.changeFormat} />
+                <Navbar level={level} changeLevel={this.changeLevel} handleChange={this.changeFormat} showingAllColors={true} />
                 <div className='Palette-colors'>
                     {colorBoxes}
                 </div>
-                <footer className='Palette-footer'>
-                    {paletteName}
-                    <span className='emoji'>{emoji}</span>
-                </footer>
+                <PaletteFooter paletteName={paletteName} emoji={emoji} />
             </div>
         )
     }
