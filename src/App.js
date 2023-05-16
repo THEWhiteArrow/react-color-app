@@ -13,6 +13,7 @@ class App extends Component {
       <Routes>
         <Route exact path="/" element={<PaletteList palettes={seedColors} />} />
         <Route path="/palette/:id" element={<PaletteWithProps />} />
+        <Route path="/palette/:id/:colorId" element={<h1>Single color pahe</h1>} />
       </Routes>
     );
   }
