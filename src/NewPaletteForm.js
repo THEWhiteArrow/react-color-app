@@ -63,7 +63,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function NewPaletteForm() {
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
+
+    const [colors, setColors] = React.useState(['purple', '#e15643']);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -72,6 +74,16 @@ export default function NewPaletteForm() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const addNewColor = (newColor) => {
+        setColors([...colors, newColor])
+    }
+
+    const removeColor = (oldColor) => {
+        setColors([...colors].filter(color => color != oldColor))
+    }
+
+    console.log(colors)
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -111,12 +123,12 @@ export default function NewPaletteForm() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <DrawerPaletteForm />
+                <DrawerPaletteForm addNewColor={addNewColor} removeColor={removeColor} />
 
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-                <MainPaletteForm />
+                <MainPaletteForm colors={colors} addNewColor={addNewColor} removeColor={removeColor} />
             </Main>
         </Box>
     );
