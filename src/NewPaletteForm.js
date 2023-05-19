@@ -11,9 +11,10 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import DrawerPaletteForm from './DrawerPaletteForm';
+import MainPaletteForm from './MainPaletteForm';
 
-
-const drawerWidth = 240;
+const drawerWidth = 340;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -110,11 +111,12 @@ export default function NewPaletteForm() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
+                <DrawerPaletteForm />
 
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-                dsdasd
+                <MainPaletteForm />
             </Main>
         </Box>
     );
