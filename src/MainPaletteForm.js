@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import DraggableColorBox from './DraggableColorBox'
+import './MainPaletteForm.css'
 
 export default class MainPaletteForm extends Component {
     constructor(props) {
@@ -8,12 +10,11 @@ export default class MainPaletteForm extends Component {
     render() {
         const { colors } = this.props
         return (
-            <div>
+            <div className='MainPaletteForm'>
 
                 <h1>MainPaletteForm</h1>
-                <ul>
-                    {colors.map(color => <li style={{ backgroundColor: color }} key={color}>{color}</li>)}
-                </ul>
+                {colors.map(color => <DraggableColorBox key={color} color={color} />)}
+
             </div>
         )
     }
