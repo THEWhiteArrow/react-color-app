@@ -23,7 +23,12 @@ const styles = createUseStyles({
         width: '100%',
         justifyContent: 'space-between',
         color: 'white',
-        marginBottom: '10px'
+        marginBottom: '10px',
+        alignItems: 'center',
+        color: 'white',
+        '& a': {
+            color: 'white',
+        }
     },
     palettes: {
         boxSizing: 'border-box',
@@ -50,6 +55,7 @@ export default function PaletteList(props) {
             <div className={classes.container}>
                 <nav className={classes.nav}>
                     <h1>React Colors</h1>
+                    <Link to="/palette/new">Create Palette</Link>
                 </nav>
                 <div className={classes.palettes}>
                     {palettes.map(palette => (

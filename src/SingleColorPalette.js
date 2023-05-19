@@ -24,21 +24,22 @@ export default class SingleColorPalette extends Component {
     changeFormat = format => this.setState({ format })
     render() {
         const { format } = this.state
+        const { classes } = this.props
         const colorBoxes = this._shades.map(color => (
             <ColorBox key={color.name} name={color.name} background={color[format]} showLink={false} />
         ))
         const { paletteName, emoji, id } = this.props.palette
         return (
-            <div className='SingleColorPalette Palette'>
+            <div className={`SingleColorPalette Palette`}>
                 <Navbar handleChange={this.changeFormat} showingAllColors={false} />
                 <div className='Palette-colors'>
                     {colorBoxes}
-                    <div className='go-back ColorBox'>
+                    <div className='ColorBox go-back Palette-colors'>
                         <Link to={`/palette/${id}`} className='back-button' >Go Back</Link>
                     </div>
                 </div>
-                <PaletteFooter paletteName={paletteName} emoji={emoji} />
-            </div>
+                <PaletteFooter paletteName={paletteName} emoji={emoji} classes={classes} />
+            </div >
         )
     }
 }

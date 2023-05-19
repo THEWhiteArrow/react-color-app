@@ -5,11 +5,11 @@ export default class PaletteFooter extends Component {
         super(props)
     }
     render() {
-        const { paletteName, emoji } = this.props
+        const { paletteName, emoji, classes } = this.props
         return (
-            <footer className='Palette-footer'>
+            <footer className={classes.footer}>
                 {paletteName}
-                <span className='emoji'>{emoji}</span>
+                <span className={classes.emoji}>{emoji}</span>
             </footer>
         )
     }

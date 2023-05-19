@@ -3,8 +3,17 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './ColorBox.css'
 import { Link } from 'react-router-dom';
 import chroma from 'chroma-js'
+import { createUseStyles } from 'react-jss';
 
-class ColorBox extends Component {
+const useStyles = createUseStyles({
+    xxx: {
+        backgroundColor: 'green'
+    }
+})
+
+export default (props) => <ColorBoxComponent {...props} classes={useStyles()} />
+
+class ColorBoxComponent extends Component {
     constructor(props) {
         super(props)
         this.state = { copied: false }
@@ -15,7 +24,6 @@ class ColorBox extends Component {
             setTimeout(() => this.setState({ copied: false }), 1500)
         })
     }
-
     render() {
         const { name, background, moreUrl, showLink } = this.props
         const { copied } = this.state
@@ -24,7 +32,7 @@ class ColorBox extends Component {
         return (
             <CopyToClipboard text={background} onCopy={this.changeCopyState}>
 
-                <div className='ColorBox' style={{ background }}>
+                <div className='ColorBox' style={{ background }} >
                     <div style={{ background }} className={`copy-overlay ${copied ? 'show' : ''}`} />
                     <div className={`copy-msg ${copied ? 'show' : ''} ${isLightColor && 'dark-text'}`}>
                         <h1>copied!</h1>
@@ -49,4 +57,4 @@ class ColorBox extends Component {
     }
 }
 
-export default ColorBox
+
