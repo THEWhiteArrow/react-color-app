@@ -3,11 +3,11 @@ import seedColors from "./seedColors";
 import { generatePalette } from "./colorHelpers";
 import { useParams } from "react-router-dom";
 
-function PaletteWithProps() {
+function PaletteWithProps(props) {
     const { id } = useParams();
-
+    const { palettes } = props
     function findPalette(id) {
-        return seedColors.find(function (palette) {
+        return palettes.find(function (palette) {
             return palette.id === id;
         })
     }

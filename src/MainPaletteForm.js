@@ -13,7 +13,12 @@ export default class MainPaletteForm extends Component {
             <div className='MainPaletteForm'>
 
                 <h1>MainPaletteForm</h1>
-                {colors.map(color => <DraggableColorBox key={color} color={color} />)}
+                {
+                    colors.map(
+                        (color, i) =>
+                            <DraggableColorBox key={color.name} name={color.name} color={color.color} />
+                    )
+                }
 
             </div>
         )

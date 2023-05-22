@@ -6,7 +6,8 @@ import { createUseStyles } from 'react-jss'
 const styles = createUseStyles({
     root: {
         backgroundColor: 'blue',
-        height: '100vh',
+        minHeight: '100vh',
+        height: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
@@ -17,6 +18,7 @@ const styles = createUseStyles({
         alignItems: 'flex-start',
         flexDirection: 'column',
         flexWrap: 'wrap',
+        padding: '10rem',
     },
     nav: {
         display: 'flex',

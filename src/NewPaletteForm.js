@@ -13,8 +13,10 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DrawerPaletteForm from './DrawerPaletteForm';
 import MainPaletteForm from './MainPaletteForm';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const drawerWidth = 340;
+const drawerWidth = 300;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -62,12 +64,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-export default function NewPaletteForm() {
+export default function NewPaletteForm(props) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
 
-    const [colors, setColors] = React.useState(['purple', '#e15643']);
-
+    const [colors, setColors] = React.useState([]);
+    const navigate = useNavigate()
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -76,20 +78,31 @@ export default function NewPaletteForm() {
         setOpen(false);
     };
 
-    const addNewColor = (newColor) => {
-        setColors([...colors, newColor])
+    const addNewColor = (newColor, newName) => {
+        const newColorObject = { color: newColor, name: newName }
+        setColors([...colors, newColorObject])
     }
 
     const removeColor = (oldColor) => {
         setColors([...colors].filter(color => color != oldColor))
     }
 
-    console.log(colors)
+    const savePalette = () => {
+        const newName = 'New Palette Name'
+
+        const newPalette = {
+            paletteName: newName,
+            id: newName.toLocaleLowerCase().replace(/ /g, "-"),
+            colors: colors
+        }
+        props.handleSave(newPalette)
+        navigate('/')
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <AppBar position="fixed" open={open}>
+            <AppBar position="fixed" open={open} color="default">
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -103,6 +116,7 @@ export default function NewPaletteForm() {
                     <Typography variant="h6" noWrap component="div">
                         Persistent drawer
                     </Typography>
+                    <Button variant="contained" color="primary" onClick={savePalette}>Save Palette</Button>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -124,7 +138,7 @@ export default function NewPaletteForm() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <DrawerPaletteForm addNewColor={addNewColor} removeColor={removeColor} />
+                <DrawerPaletteForm colors={colors} addNewColor={addNewColor} removeColor={removeColor} />
 
             </Drawer>
             <Main open={open}>
