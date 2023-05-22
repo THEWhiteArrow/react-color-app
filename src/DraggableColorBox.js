@@ -3,6 +3,9 @@ import './DraggableColorBox.css'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function DraggableColorBox(props) {
+    const handleDelete = () => {
+        props.handleDelete(props.name)
+    }
     return (
         <div className='DraggableColorBox' style={{ backgroundColor: props.color, wordBreak: 'break-word' }}>
 
@@ -10,7 +13,7 @@ export default function DraggableColorBox(props) {
                 <span>
                     {props.name}
                 </span>
-                <DeleteIcon className='delete-icon' />
+                <DeleteIcon className='delete-icon' onClick={handleDelete} />
             </div>
         </div>
     )

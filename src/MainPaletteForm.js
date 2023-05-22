@@ -16,7 +16,7 @@ export default class MainPaletteForm extends Component {
                 {
                     colors.map(
                         (color, i) =>
-                            <DraggableColorBox key={color.name} name={color.name} color={color.color} />
+                            <DraggableColorBox key={color.name} name={color.name} color={color.color} handleDelete={this.props.handleDelete} />
                     )
                 }
 

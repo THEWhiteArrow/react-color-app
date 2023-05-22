@@ -71,7 +71,7 @@ export default function NewPaletteForm(props) {
     const [open, setOpen] = React.useState(true);
 
     const [colors, setColors] = React.useState([]);
-    const [newPaletteName, setNewPaletteName] = React.useState([]);
+    const [newPaletteName, setNewPaletteName] = React.useState("");
     const navigate = useNavigate()
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -116,6 +116,9 @@ export default function NewPaletteForm(props) {
         handleLoad()
     })
 
+    const handleDelete = (deleteName) => {
+        setColors([...colors].filter((color => color.name != deleteName)))
+    }
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -168,7 +171,7 @@ export default function NewPaletteForm(props) {
             </Drawer>
             <Main open={open}>
                 {/* <DrawerHeader /> */}
-                <MainPaletteForm colors={colors} addNewColor={addNewColor} removeColor={removeColor} />
+                <MainPaletteForm colors={colors} addNewColor={addNewColor} removeColor={removeColor} handleDelete={handleDelete} />
             </Main>
         </Box>
     );
