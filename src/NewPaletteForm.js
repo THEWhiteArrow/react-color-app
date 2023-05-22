@@ -15,6 +15,8 @@ import DrawerPaletteForm from './DrawerPaletteForm';
 import MainPaletteForm from './MainPaletteForm';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { TextValidator } from 'react-material-ui-form-validator';
+import { ValidatorForm } from 'react-material-ui-form-validator';
 
 const drawerWidth = 300;
 
@@ -69,6 +71,7 @@ export default function NewPaletteForm(props) {
     const [open, setOpen] = React.useState(true);
 
     const [colors, setColors] = React.useState([]);
+    const [newPaletteName, setNewPaletteName] = React.useState([]);
     const navigate = useNavigate()
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -87,8 +90,8 @@ export default function NewPaletteForm(props) {
         setColors([...colors].filter(color => color != oldColor))
     }
 
-    const savePalette = () => {
-        const newName = 'New Palette Name'
+    const handleSubmit = () => {
+        const newName = newPaletteName
 
         const newPalette = {
             paletteName: newName,
@@ -98,6 +101,20 @@ export default function NewPaletteForm(props) {
         props.handleSave(newPalette)
         navigate('/')
     }
+
+    const handleChange = (evt) => {
+        setNewPaletteName(evt.target.value)
+    }
+
+    const handleLoad = (evt) => {
+        ValidatorForm.addValidationRule('isPaletteNameUnique', (value) => props.palettes.every(
+            ({ paletteName }) => paletteName.toLowerCase() !== newPaletteName.toLowerCase()
+        ))
+    }
+
+    React.useEffect(() => {
+        handleLoad()
+    })
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -116,7 +133,15 @@ export default function NewPaletteForm(props) {
                     <Typography variant="h6" noWrap component="div">
                         Persistent drawer
                     </Typography>
-                    <Button variant="contained" color="primary" onClick={savePalette}>Save Palette</Button>
+                    <ValidatorForm onSubmit={handleSubmit} style={{ display: 'flex', padding: '10px 0' }}>
+                        <TextValidator
+                            validators={["required", "isPaletteNameUnique"]}
+                            errorMessages={["Enter palette name", "Palette already exists"]}
+                            label="Palette Name" value={newPaletteName} onChange={handleChange}
+                        />
+
+                        <Button variant="contained" color="primary" type="submit">Save Palette</Button>
+                    </ValidatorForm>
                 </Toolbar>
             </AppBar>
             <Drawer

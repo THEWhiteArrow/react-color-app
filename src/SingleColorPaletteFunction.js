@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom'
 import SingleColorPalette from './SingleColorPalette'
-import seedColors from "./seedColors";
 import { generatePalette } from "./colorHelpers";
 
 import { createUseStyles } from 'react-jss';
@@ -40,9 +39,10 @@ const styles = createUseStyles({
 
 export default function SingleColorPaletteFunction(props) {
     const { id, colorId } = useParams()
+    const { palettes } = props
 
     function findPalette(id) {
-        return seedColors.find(function (palette) {
+        return palettes.find(function (palette) {
             return palette.id === id;
         })
     }

@@ -21,9 +21,9 @@ class App extends Component {
 
       <Routes>
         <Route exact path="/" element={<PaletteList palettes={this.state.palettes} />} />
-        <Route path="/palette/new" exact element={<NewPaletteForm handleSave={this.savePalette} />} />
+        <Route path="/palette/new" exact element={<NewPaletteForm palettes={this.state.palettes} handleSave={this.savePalette} />} />
         <Route path="/palette/:id" element={<PaletteWithProps palettes={this.state.palettes} />} />
-        <Route path="/palette/:id/:colorId" element={<SingleColorPaletteFunction />} />
+        <Route path="/palette/:id/:colorId" element={<SingleColorPaletteFunction palettes={this.state.palettes} />} />
       </Routes>
     );
   }
